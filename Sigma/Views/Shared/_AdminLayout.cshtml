@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Intelligence - @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/global")
+    <link href="~/Content/CSS/admin/login.css" rel="stylesheet" />
+    @Styles.Render("~/Content/theme")
+    
+
+</head>
+<body class="login">
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+
+    @RenderBody()
+
+    <div class="copyright">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy; Sigmatec. Business Intelligence
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/layout/jquery-migrate.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/layout/jquery.blockui.min.js"></script>
+    <script src="~/Scripts/layout/jquery.cokie.min.js"></script>
+    <script src="~/Scripts/layout/jquery.uniform.min.js"></script>
+    <script src="~/Scripts/layout/jquery.validate.js"></script>
+    @Scripts.Render("~/Scripts/metronic")
+    @Scripts.Render("~/Scripts/layout")
+    @Scripts.Render("~/Scripts/demo")
+    <script src="~/Scripts/login.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        jQuery(document)
+            .ready(function () {
+                Metronic.init(); // init metronic core components
+                Layout.init(); // init current layout
+                Login.init();
+                Demo.init();
+            });
+    </script>
+</body>
+</html>
