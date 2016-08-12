@@ -110,3 +110,5 @@ UpgradeLog.htm
 *DAL.pdb
 
 /bin
+*.cs.dll
+*FileListAbsolute.txt
