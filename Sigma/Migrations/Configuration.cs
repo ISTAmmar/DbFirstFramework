@@ -10,6 +10,7 @@ namespace Sigma.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Sigma.Models.ApplicationDbContext context)
