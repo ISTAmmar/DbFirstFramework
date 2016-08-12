@@ -112,3 +112,4 @@ UpgradeLog.htm
 /bin
 *.cs.dll
 *FileListAbsolute.txt
+*.cache
