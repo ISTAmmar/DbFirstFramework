@@ -3,16 +3,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Models.DomainModels;
 
 namespace Sigma.Models
 {
-    // You can add profile data for the user by adding more properties to your User class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class User : IdentityUser
+    public class Users : IdentityUser<int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
-        public long? EmployeeId { get; set; }
-        public string Email { get; set; }
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -21,27 +17,82 @@ namespace Sigma.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationUserRole : IdentityUserRole<int>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+    }
+
+    public class ApplicationUserLogin : IdentityUserLogin<int>
+    {
+    }
+
+    public class ApplicationUserClaim : IdentityUserClaim<int>
+    {
+    }
+
+    public class ApplicationRole : IdentityRole<int, ApplicationUserRole>
+    {
+    }
+
+    public class ApplicatonUserStore :
+        UserStore<Users, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    {
+        public ApplicatonUserStore(ApplicationDbContext context)
+            : base(context)
         {
         }
+    }
 
+    public class ApplicationDbContext
+        : IdentityDbContext<Users, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    {
+        public ApplicationDbContext()
+            : base("DefaultConnection")
+        {
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder); // This needs to go before the other rules!
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); // This needs to go before the other rules!
 
-        //    modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
-        //    //modelBuilder.Entity<IdentityRole>().ToTable("Role");
-        //    //modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
-        //    //modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
-        //    //modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
-        //}
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.EmailConfirmed).HasColumnName("IsActive");
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.PasswordHash).HasColumnName("Password");
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.PhoneNumberConfirmed).HasColumnName("IsSuperAdmin");
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.TwoFactorEnabled).HasColumnName("HasAllDistribution");
+            modelBuilder.Entity<Users>().ToTable("User").Property(p => p.LockoutEnabled).HasColumnName("HasAllCategory");
+            //modelBuilder.Entity<IdentityRole>().ToTable("Role");
+            //modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
+            //modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
+            //modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim");
+        }
     }
+
+    //public class Users : IdentityUser
+    //{
+    //    //public long? EmployeeId { get; set; }
+    //    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Users> manager)
+    //    {
+    //        // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+    //        var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+    //        // Add custom user claims here
+    //        return userIdentity;
+    //    }
+    //}
+
+    //public class ApplicationDbContext : IdentityDbContext<Users>
+    //{
+    //    public ApplicationDbContext()
+    //        : base("DefaultConnection", throwIfV1Schema: false)
+    //    {
+    //    }
+
+    //    public static ApplicationDbContext Create()
+    //    {
+    //        return new ApplicationDbContext();
+    //    }
+    //}
 }

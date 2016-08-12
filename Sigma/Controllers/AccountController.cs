@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -148,19 +149,19 @@ namespace Sigma.Controllers
         {
             if (ModelState.IsValid)
             {
-                User users = new User { UserName = model.Email, Email = model.Email, EmployeeId = 123 };
-                var result = await UserManager.CreateAsync(users, model.Password);
+                Users user = new Users { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(users, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(users.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = users.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(users.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(userses.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userses.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(userses.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 AddErrors(result);
             }
@@ -178,7 +179,7 @@ namespace Sigma.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var result = await UserManager.ConfirmEmailAsync(Convert.ToInt32(userId), code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -364,7 +365,7 @@ namespace Sigma.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new Users { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

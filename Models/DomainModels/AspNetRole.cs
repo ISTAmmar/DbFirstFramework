@@ -7,6 +7,6 @@ namespace Models.DomainModels
         public string Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
