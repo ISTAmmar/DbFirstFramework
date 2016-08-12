@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Implementation\DashboardService.cs" />
     <Compile Include="Implementation\EmployeeService.cs" />
+    <Compile Include="Implementation\RolePermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

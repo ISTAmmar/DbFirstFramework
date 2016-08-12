@@ -6,7 +6,7 @@ namespace BLL.Implementation
 {
     public class EmployeeService
     {
-        public EmployeeRepository employeeRepository { get; set; }
+        private EmployeeRepository employeeRepository { get; set; }
 
         public EmployeeService()
         {

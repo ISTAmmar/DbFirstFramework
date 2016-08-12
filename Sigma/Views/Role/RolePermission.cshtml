@@ -1,0 +1,42 @@
+﻿@model Sigma.ViewModels.RolePermissionViewModel
+
+@{
+    ViewBag.Title = "Role Base Authorization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <h3 class="page-title">
+        Manage Permissions <small>Role Base</small>
+    </h3>
+    @using (Html.BeginForm("RolePermission", "Role", new { }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="form-body">
+            <div class="form-group">
+                <label class="control-label col-md-3">Role</label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.RoleId, new SelectList(Model.Roles, "Id", "Name"), new { @class = "form-control", onchange = "this.form.submit();" })
+                </div>
+            </div>
+        </div>
+    }
+    @foreach (var rolePermission in Model.RolePermissions)
+            {
+        <div class="control-group row-fluid">
+            <div class="span3">
+                @Html.CheckBoxFor(m => rolePermission.IsSelected, new { value = rolePermission.PermissionId, @class = "" })
+                @rolePermission.Permission.PermissionDescription
+            </div>
+        </div>
+    }
+
+    @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-solid placeholder-no-fix", placeholder = "Username" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+    @*<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" />*@
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+    });
+</script>

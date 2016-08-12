@@ -6,7 +6,7 @@ namespace BLL.Implementation
 {
     public class DashboardService
     {
-        public DistributorRepository distributorRepository { get; set; }
+        private DistributorRepository distributorRepository { get; set; }
 
         public DashboardService()
         {

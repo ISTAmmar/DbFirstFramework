@@ -6,9 +6,9 @@ using Sigma.ViewModels;
 namespace Sigma.Controllers
 {
     [Authorize]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
-        public DashboardService dashboardService { get; set; }
+        private DashboardService dashboardService { get; set; }
 
         public DashboardController()
         {
