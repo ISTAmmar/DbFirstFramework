@@ -19,7 +19,7 @@ namespace Sigma.Authorize
             PermissionKeys = PermissionKey.Split(',');
             foreach (var permissionKey in PermissionKeys)
             {
-                if (userPermissionsSet.Contains(permissionKey))
+                if (userPermissionsSet != null && userPermissionsSet.Contains(permissionKey))
                     return true;
             }
             return false;

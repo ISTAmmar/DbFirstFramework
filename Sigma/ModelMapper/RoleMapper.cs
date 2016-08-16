@@ -12,5 +12,14 @@ namespace Sigma.ModelMapper
                 Name = source.Name
             };
         }
+
+        public static AspNetRole CreateFromClientToServer(this Models.AspNetRole source)
+        {
+            return new AspNetRole
+            {
+                Id = source.Id,
+                Name = source.Name
+            };
+        }
     }
 }

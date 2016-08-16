@@ -20,23 +20,51 @@
             </div>
         </div>
     }
-    @foreach (var rolePermission in Model.RolePermissions)
-            {
-        <div class="control-group row-fluid">
-            <div class="span3">
-                @Html.CheckBoxFor(m => rolePermission.IsSelected, new { value = rolePermission.PermissionId, @class = "" })
-                @rolePermission.Permission.PermissionDescription
+    @using (Html.BeginForm("PostRolePermission", "Role", new { }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        foreach (var rolePermission in Model.RolePermissions)
+        {
+            <div class="control-group row-fluid">
+                <div class="span3">
+                    @Html.CheckBoxFor(m => rolePermission.IsSelected, new { value = rolePermission.PermissionId, @class = "" })
+                    @rolePermission.Permission.PermissionDescription
+                </div>
             </div>
+        }
+        <div class="col-md-3">
+            @Html.ActionLink("Save", "PostRolePermission", new { roleValue = "SelectedRoleValue", selectedList = "SelectedListValues" }, new { @class = "btn btn-success uppercase", id = "btnSave" })
+            @*<input type="submit" id="btnSave" value="Save" class="btn btn-success uppercase"/>*@
         </div>
     }
-
     @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-solid placeholder-no-fix", placeholder = "Username" })
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
     @*<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" />*@
 </div>
 
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-
+@section jsCode{
+    $("#btnSave").click(function (evt) {
+        $("#btnSave").prop("href", ProcessValue($("#btnSave").prop("href")));
     });
+
+    function ProcessValue(fakedUri) {
+        var uri = fakedUri.replace("SelectedRoleValue", $('#RoleId').val());
+        uri = uri.replace("SelectedListValues", getSelectedList());
+        return uri;
+    }
+
+    function getSelectedList() {
+        var selectedList = "";
+        $("input:checkbox:checked").each(function () {
+            if ($(this).attr('value') != undefined && $(this).attr('value').length > 0) {
+                selectedList += $(this).attr('value') + ",";
+            }
+        });
+        if (selectedList.length > 1)
+            selectedList = selectedList.substring(0, selectedList.length - 1);
+        return selectedList;
+    }
+}
+<script type="text/javascript">
+    
+    
 </script>

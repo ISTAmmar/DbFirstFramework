@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace DAL.BaseRepository
             DbSet.Remove(entity);
         }
 
-        public IQueryable<TDomainClass> GetAll()
+        public IEnumerable<TDomainClass> GetAll()
         {
             return DbSet;
         }
