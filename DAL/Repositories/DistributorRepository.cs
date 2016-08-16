@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using DAL.BaseRepository;
 using Models.DomainModels;
+using Repository.BaseRepository;
 
-namespace DAL.Repositories
+namespace Repository.Repositories
 {
     public class DistributorRepository : BaseRepository<Distributor>
     {

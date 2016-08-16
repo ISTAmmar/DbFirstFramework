@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using System.Linq;
 
-namespace DAL.BaseRepository
+namespace Repository.BaseRepository
 {
     public abstract class BaseRepository<TDomainClass> where TDomainClass : class
     {

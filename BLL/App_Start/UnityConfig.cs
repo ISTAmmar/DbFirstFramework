@@ -1,29 +1,16 @@
-using System;
 using Microsoft.Practices.Unity;
 
-namespace BLL
+namespace Implementation
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
     public class UnityConfig
     {
-        #region Unity Container
-        private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
-        {
-            var container = new UnityContainer();
-            RegisterTypes(container);
-            return container;
-        });
+        // ReSharper disable once InconsistentNaming
+        private static IUnityContainer unityContainer;
 
-        /// <summary>
-        /// Gets the configured Unity container.
-        /// </summary>
-        public static IUnityContainer GetConfiguredContainer()
-        {
-            return container.Value;
-        }
-        #endregion
+        public static IUnityContainer UnityContainer { get { return unityContainer; } set { unityContainer = value; } }
 
         /// <summary>Registers the type mappings with the Unity container.</summary>
         /// <param name="container">The unity container to configure.</param>

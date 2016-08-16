@@ -1541,9 +1541,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
+    <ProjectReference Include="..\BLL\Implementation.csproj">
       <Project>{01d8c71f-b7da-45c2-89db-9f0faef1ddc0}</Project>
-      <Name>BLL</Name>
+      <Name>Implementation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{0B561D9E-D7CE-406A-92F2-9902570C4B42}</Project>

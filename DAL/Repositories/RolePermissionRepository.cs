@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using DAL.BaseRepository;
 using Models.DomainModels;
+using Repository.BaseRepository;
 
-namespace DAL.Repositories
+namespace Repository.Repositories
 {
     public class RolePermissionRepository : BaseRepository<RolePermission>
     {

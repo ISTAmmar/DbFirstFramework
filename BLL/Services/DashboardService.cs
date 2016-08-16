@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using DAL.Repositories;
 using Models.ResponseModels;
+using Repository.Repositories;
 
-namespace BLL.Implementation
+namespace Implementation.Services
 {
     public class DashboardService
     {

@@ -1,12 +1,11 @@
 using System.Linq;
 using System.Web.Mvc;
-using BLL;
-using Microsoft.Practices.Unity.Mvc;
+using Implementation;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnityWebActivator), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UnityWebActivator), "Shutdown")]
 
-namespace BLL
+namespace Implementation
 {
     /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
     public static class UnityWebActivator

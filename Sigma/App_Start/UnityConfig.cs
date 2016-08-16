@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Practices.Unity;
+using Sigma.Controllers;
 
 namespace Sigma
 {
@@ -13,6 +14,7 @@ namespace Sigma
         {
             var container = new UnityContainer();
             RegisterTypes(container);
+            Implementation.TypeRegistrations.RegisterType(container);
             return container;
         });
 
@@ -35,7 +37,8 @@ namespace Sigma
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<ManageController>(new InjectionConstructor());
         }
     }
 }

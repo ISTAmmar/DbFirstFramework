@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using BLL.Implementation;
+using Implementation.Services;
 using Interfaces.Services;
 using Models.DomainModels;
 using Sigma.Authorize;
@@ -10,8 +10,6 @@ namespace Sigma.Controllers
 {
     public class EmployeeController : BaseController
     {
-        
-
         #region Private
 
         private EmployeeService employeeService { get; set; }

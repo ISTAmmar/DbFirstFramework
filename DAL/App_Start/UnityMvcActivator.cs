@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Web.Mvc;
-using DAL;
 using Microsoft.Practices.Unity.Mvc;
+using Repository;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnityWebActivator), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UnityWebActivator), "Shutdown")]
 
-namespace DAL
+namespace Repository
 {
     /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
     public static class UnityWebActivator

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DAL.Repositories;
 using Models.DomainModels;
 using Models.ResponseModels;
+using Repository.Repositories;
 
-namespace BLL.Implementation
+namespace Implementation.Services
 {
     public class RolePermissionService
     {

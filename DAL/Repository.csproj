@@ -7,8 +7,8 @@
     <ProjectGuid>{9D062229-5F0B-448A-A80A-A7CB2C391077}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>Repository</RootNamespace>
+    <AssemblyName>Repository</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -119,6 +119,7 @@
     <Compile Include="Repositories\DistributorRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\RolePermissionRepository.cs" />
+    <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -132,6 +133,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{0b561d9e-d7ce-406a-92f2-9902570c4b42}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{21B7C4CD-B89B-40C0-8076-30FF185B15D4}</Project>
       <Name>Models</Name>

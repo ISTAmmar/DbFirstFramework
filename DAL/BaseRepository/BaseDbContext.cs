@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using Models.DomainModels;
 
-namespace DAL.BaseRepository
+namespace Repository.BaseRepository
 {
     public class BaseDbContext : DbContext
     {

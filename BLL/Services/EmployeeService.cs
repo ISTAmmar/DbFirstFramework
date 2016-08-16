@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using DAL.Repositories;
 using Interfaces.Services;
 using Models.DomainModels;
+using Repository.Repositories;
 
-namespace BLL.Implementation
+namespace Implementation.Services
 {
     public class EmployeeService : IEmployeeService
     {
