@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{01D8C71F-B7DA-45C2-89DB-9F0FAEF1DDC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{0B561D9E-D7CE-406A-92F2-9902570C4B42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{01D8C71F-B7DA-45C2-89DB-9F0FAEF1DDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D8C71F-B7DA-45C2-89DB-9F0FAEF1DDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01D8C71F-B7DA-45C2-89DB-9F0FAEF1DDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B561D9E-D7CE-406A-92F2-9902570C4B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B561D9E-D7CE-406A-92F2-9902570C4B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B561D9E-D7CE-406A-92F2-9902570C4B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B561D9E-D7CE-406A-92F2-9902570C4B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
