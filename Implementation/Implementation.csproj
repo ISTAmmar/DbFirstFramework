@@ -107,7 +107,7 @@
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\Repository.csproj">
+    <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{9D062229-5F0B-448A-A80A-A7CB2C391077}</Project>
       <Name>Repository</Name>
     </ProjectReference>
