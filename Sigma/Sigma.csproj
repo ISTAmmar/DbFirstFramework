@@ -1541,7 +1541,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\Implementation.csproj">
+    <ProjectReference Include="..\Implementation\Implementation.csproj">
       <Project>{01d8c71f-b7da-45c2-89db-9f0faef1ddc0}</Project>
       <Name>Implementation</Name>
     </ProjectReference>
@@ -1552,6 +1552,10 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{21B7C4CD-B89B-40C0-8076-30FF185B15D4}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{9d062229-5f0b-448a-a80a-a7cb2c391077}</Project>
+      <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
