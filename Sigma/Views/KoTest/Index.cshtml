@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "KO Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="~/Scripts/knockout-3.4.0.js"></script>*@
+
+<div class="page-content">
+    <div data-bind="with: sample">
+        <h3>Sample</h3>
+        <br />
+        <p>
+            First Name: <input data-bind="value: firstName" />
+        </p>
+        <p>
+            Last Name: <input data-bind="value: lastName" />
+        </p>
+        <p>Full Name: <span data-bind="text: fullName"></span></p>
+
+        <h3>
+            Friends (<span data-bind="text: friends().length"></span>)
+        </h3>
+        <ul data-bind="template: { name: 'friendsTemplate', foreach: friends}"></ul>
+        <button data-bind="click: addFriend, enable: friends().length < 5">Add Friend</button>
+        <br />
+        <br />
+        <button data-bind="click: save">Save</button>
+    </div>
+
+    <div data-bind="with: task">
+        <h3>Tasks</h3>
+        <br />
+        <form data-bind="submit: addTask">
+            Add Task : <input type="text" data-bind="value: newTaskText" />
+            <button type="submit">Add</button>
+        </form>
+        <ul data-bind="foreach: tasks, visible: tasks().length > 0">
+            <li>
+                <input type="checkbox" data-bind="checked: isDone, click: $parent.taskCompleted" />
+                <input type="text" data-bind="value: title, disable: isDone" />
+                @*<button data-bind="clicl: $parent.removeTask">Remove</button>*@
+                <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<a href="#" id="attach_1590654" class="attachlink"
+   onclick="if (window.vbseo_loggedin == 'yes' || document.cookie.indexOf('attachsubed') >= 0)
+{ showplusone(1590654); top.location = 'attachment.php?attachmentid=114364'; showplusone(1590654); return false; } else { showdownloader(1590654); document.getElementById('attachmentid_1590654').value = '114364'; document.getElementById('postid_1590654').value = '1590654'; document.getElementById('attachedloc_1590654').value = 'attachment.php?attachmentid=114364'; return false; }" style="font-size:12pt;font-weight:bold;text-decoration:none;color:#496ca1;" rel="nofollow">Internship Certificate.doc</a>
+
+@section scripts
+{
+    <script id="friendsTemplate" type="text/html">
+        <li>
+            <input data-bind="value: name" />
+            <button data-bind="click: remove">Remove</button>
+
+            <label><input type="checkbox" data-bind="checked: isOnTwitter" />Is on Twitter</label>
+            <input type="text" data-bind="value: twitterName, visible: isOnTwitter" />
+        </li>
+    </script>
+    <script>
+        function friend(name) {
+            return {
+                name: ko.observable(name),
+                isOnTwitter: ko.observable(false),
+                twitterName: ko.observable(""),
+                remove: function () {
+                    SampleViewModel.friends.remove(this);
+                }
+            }
+        }
+        var SampleViewModel = {
+            firstName: ko.observable("Ammar"),
+            lastName: ko.observable("Akhtar"),
+
+            friends: ko.observableArray([new friend("Nadir"), new friend("Talha")]),
+            addFriend: function () {
+                this.friends.push(new friend("Another"));
+            },
+            save: function () {
+                $.ajax({
+                    url: "/KoTest/Save",
+                    data: this.getData(),
+                    method: "POST",
+                    contentType: "application/json",
+                    success: function (result) {
+                        alert(result.message);
+                    }
+                });
+            },
+            getData: function () {
+                var ret = ko.toJSON(this);
+                return ret;
+            }
+        };
+        SampleViewModel.fullName = ko.dependentObservable(function () {
+            return this.firstName() + " " + this.lastName();
+        },
+            SampleViewModel);
+
+        function Task(data) {
+            return {
+                title: ko.observable(data),
+                isDone: ko.observable(false)
+            }
+        }
+        var TaskViewModel = {
+            tasks: ko.observableArray([new Task("Task 1")]),
+            newTaskText: ko.observable(),
+            incompletedTasks: ko.computed(function () {
+
+            }),
+            addTask: function () {
+                this.tasks.push(new Task(this.newTaskText()));
+                this.newTaskText("");
+            },
+            removeTask: function (task) {
+                TaskViewModel.tasks.remove(task);
+            },
+            taskCompleted: function () {
+                if(this.isDone())
+                    alert("Task completed");
+                return true;
+            }
+        }
+        var ViewModel = {
+            sample: SampleViewModel,
+            task: TaskViewModel
+        }
+
+        // apply binding
+        ko.applyBindings(ViewModel);
+    </script>
+}
