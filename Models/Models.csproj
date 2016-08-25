@@ -98,9 +98,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\TaskStatus.cs" />
     <Compile Include="DomainModels\AspNetRole.cs" />
     <Compile Include="DomainModels\Permission.cs" />
     <Compile Include="DomainModels\RolePermission.cs" />
+    <Compile Include="DomainModels\Task.cs" />
     <Compile Include="DomainModels\User.cs" />
     <Compile Include="DomainModels\AspNetUserClaim.cs" />
     <Compile Include="DomainModels\AspNetUserLogin.cs" />

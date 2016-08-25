@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Implementation.Services;
+using Interfaces.Services;
 using Sigma.ViewModels;
 
 namespace Sigma.Controllers
@@ -8,11 +8,11 @@ namespace Sigma.Controllers
     [Authorize]
     public class DashboardController : BaseController
     {
-        private DashboardService dashboardService { get; set; }
+        private IDashboardService dashboardService { get; set; }
 
-        public DashboardController()
+        public DashboardController(IDashboardService dashboardService)
         {
-            dashboardService = new DashboardService();
+            this.dashboardService = dashboardService;
         }
 
         // GET: Dashboard

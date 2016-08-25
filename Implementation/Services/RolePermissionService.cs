@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Interfaces.Repositories;
+using Interfaces.Services;
 using Models.DomainModels;
 using Models.ResponseModels;
-using Repository.Repositories;
 
 namespace Implementation.Services
 {
-    public class RolePermissionService
+    public class RolePermissionService : IRolePermissionService
     {
         #region Private
 
-        private RolePermissionRepository repository { get; set; }
-        private AspNetRoleRepository roleRepository { get; set; }
+        private IRolePermissionRepository repository { get; set; }
+        private IAspNetRoleRepository roleRepository { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public RolePermissionService()
+        public RolePermissionService(IRolePermissionRepository repository, IAspNetRoleRepository roleRepository)
         {
-            repository = new RolePermissionRepository();
-            roleRepository = new AspNetRoleRepository();
+            this.repository = repository;
+            this.roleRepository = roleRepository;
         }
 
         #endregion

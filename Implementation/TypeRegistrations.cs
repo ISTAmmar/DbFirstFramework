@@ -11,6 +11,9 @@ namespace Implementation
             UnityConfig.UnityContainer = unityContainer;
             Repository.TypeRegistrations.RegisterType(unityContainer);
             unityContainer.RegisterType<IEmployeeService, EmployeeService>();
+            unityContainer.RegisterType<IRolePermissionService, RolePermissionService>();
+            unityContainer.RegisterType<ITaskService, TaskService>();
+            unityContainer.RegisterType<IDashboardService, DashboardService>();
         }
     }
 }

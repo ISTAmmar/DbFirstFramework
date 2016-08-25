@@ -2,17 +2,17 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Implementation.Services;
+using Interfaces.Services;
 
 namespace Sigma.Controllers.API
 {
     public class DashboardApiController : ApiController
     {
-        public DashboardService dashboardService { get; set; }
+        public IDashboardService dashboardService { get; set; }
 
-        public DashboardApiController()
+        public DashboardApiController(IDashboardService dashboardService)
         {
-            dashboardService = new DashboardService();
+            this.dashboardService = dashboardService;
         }
 
         [HttpGet]

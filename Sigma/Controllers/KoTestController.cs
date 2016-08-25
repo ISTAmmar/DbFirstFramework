@@ -3,7 +3,7 @@ using Sigma.Models;
 
 namespace Sigma.Controllers
 {
-    public class KoTestController : Controller
+    public class KoTestController : BaseController
     {
         // GET: KoTest
         public ActionResult Index()

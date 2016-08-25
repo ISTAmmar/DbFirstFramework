@@ -1,39 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using Interfaces.Repositories;
+using Microsoft.Practices.Unity;
 
 namespace Repository.BaseRepository
 {
-    public abstract class BaseRepository<TDomainClass> where TDomainClass : class
+    public abstract class BaseRepository<TDomainClass> : IBaseRepository<TDomainClass, int>
+        where TDomainClass : class
     {
+        private readonly IUnityContainer container;
+        protected abstract IDbSet<TDomainClass> DbSet { get; }
         public BaseDbContext db;
 
-        protected BaseRepository()
+        //protected BaseRepository()
+        //{
+        //    db = new BaseDbContext();
+        //}
+        protected BaseRepository(IUnityContainer container)
         {
-            db = new BaseDbContext();
+
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+            this.container = container;
+            string connectionString = ConfigurationManager.ConnectionStrings["BaseDbContext"].ConnectionString;
+            db =
+                (BaseDbContext)
+                    container.Resolve(typeof(BaseDbContext),
+                        new ResolverOverride[] {new ParameterOverride("connectionString", connectionString)});
         }
 
-        protected abstract IDbSet<TDomainClass> DbSet { get; }
-
-        public void Add(TDomainClass entity)
+        public virtual void Add(TDomainClass entity)
         {
             DbSet.Add(entity);
         }
 
-        public void Update(TDomainClass entity)
+        public virtual void Update(TDomainClass entity)
         {
             DbSet.AddOrUpdate(entity);
         }
 
-        public void Delete(TDomainClass entity)
+        public virtual void Delete(TDomainClass entity)
         {
             DbSet.Remove(entity);
         }
 
-        public IEnumerable<TDomainClass> GetAll()
+        public virtual IEnumerable<TDomainClass> GetAll()
         {
             return DbSet;
+        }
+
+        /// <summary>
+        /// Find Entity by Id
+        /// </summary>
+        public TDomainClass Find(int id)
+        {
+            return DbSet.Find(id);
+        }
+        /// <summary>
+        /// Find Entity by Id
+        /// </summary>
+        public TDomainClass Find(string id)
+        {
+            return DbSet.Find(id);
+        }
+        /// <summary>
+        /// Find Entity by Id
+        /// </summary>
+        public TDomainClass Find(long id)
+        {
+            return DbSet.Find(id);
         }
 
         public void SaveChanges()

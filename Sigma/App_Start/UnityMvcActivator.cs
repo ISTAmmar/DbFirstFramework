@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
 using Sigma;
 
@@ -11,15 +12,16 @@ namespace Sigma
     /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
     public static class UnityWebActivator
     {
+        // ReSharper disable once InconsistentNaming
+        private static IUnityContainer container;
+
         /// <summary>Integrates Unity when the application starts.</summary>
         public static void Start() 
         {
-            var container = UnityConfig.GetConfiguredContainer();
-
             FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
+            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(Container));
 
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            DependencyResolver.SetResolver(new UnityDependencyResolver(Container));
 
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
@@ -28,8 +30,12 @@ namespace Sigma
         /// <summary>Disposes the Unity container when the application is shut down.</summary>
         public static void Shutdown()
         {
-            var container = UnityConfig.GetConfiguredContainer();
             container.Dispose();
+        }
+
+        public static IUnityContainer Container
+        {
+            get { return container ?? (container = UnityConfig.GetConfiguredContainer()); }
         }
     }
 }

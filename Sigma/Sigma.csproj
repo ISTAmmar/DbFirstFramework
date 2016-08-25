@@ -234,6 +234,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\TaskController.cs" />
     <Compile Include="Authorize\SiteAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\DashboardApiController.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Controllers\KoTestController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +261,7 @@
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\Taskk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -648,6 +652,8 @@
     <Content Include="Images\layout\syncfusion-icons.png" />
     <Content Include="Images\sprite.png" />
     <Content Include="Images\sprite_original.png" />
+    <Content Include="Js\Task\TaskModel.js" />
+    <Content Include="Js\Task\TaskViewModel.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -744,6 +750,7 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <None Include="Views\KoTest\Index.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

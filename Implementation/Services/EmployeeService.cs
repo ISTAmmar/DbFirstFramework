@@ -9,10 +9,10 @@ namespace Implementation.Services
     {
         private EmployeeRepository employeeRepository { get; set; }
 
-        public EmployeeService()
-        {
-            employeeRepository = new EmployeeRepository();
-        }
+        //public EmployeeService()
+        //{
+        //    employeeRepository = new EmployeeRepository();
+        //}
 
         public IEnumerable<Employee> GetAll()
         {

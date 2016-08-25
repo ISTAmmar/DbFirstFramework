@@ -16,10 +16,10 @@ namespace Implementation.Services
 
         #region Constructor
 
-        public AspNetRoleService()
-        {
-            repository = new AspNetRoleRepository();
-        }
+        //public AspNetRoleService()
+        //{
+        //    repository = new AspNetRoleRepository();
+        //}
 
         #endregion
 

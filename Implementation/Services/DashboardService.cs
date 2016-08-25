@@ -1,16 +1,17 @@
 ﻿using System.Linq;
+using Interfaces.Repositories;
+using Interfaces.Services;
 using Models.ResponseModels;
-using Repository.Repositories;
 
 namespace Implementation.Services
 {
-    public class DashboardService
+    public class DashboardService : IDashboardService
     {
-        private DistributorRepository distributorRepository { get; set; }
+        private IDistributorRepository distributorRepository { get; set; }
 
-        public DashboardService()
+        public DashboardService(IDistributorRepository distributorRepository)
         {
-            distributorRepository = new DistributorRepository();
+            this.distributorRepository = distributorRepository;
         }
 
         public DashboardResponse GetDashboardResponse()

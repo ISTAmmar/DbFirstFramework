@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Implementation.Services;
+using Interfaces.Services;
 using Sigma.ModelMapper;
 using Sigma.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -20,7 +20,7 @@ namespace Sigma.Controllers
     {
         #region Private
 
-        private RolePermissionService rolePermissionService { get; set; }
+        private IRolePermissionService rolePermissionService { get; set; }
         private AspNetRoleService roleService { get; set; }
         private ApplicationUserManager _userManager;
 
@@ -28,9 +28,9 @@ namespace Sigma.Controllers
 
         #region Constructor
 
-        public RoleController()
+        public RoleController(IRolePermissionService rolePermissionService)
         {
-            rolePermissionService = new RolePermissionService();
+            this.rolePermissionService = rolePermissionService;
             roleService = new AspNetRoleService();
         }
 
