@@ -13,5 +13,6 @@ namespace Sigma.Models
         public short Progress { get; set; }
         public bool IsParent { get; set; }
         public long? ParentTaskId { get; set; }
+        public string ParentTaskName { get; set; }
     }
 }

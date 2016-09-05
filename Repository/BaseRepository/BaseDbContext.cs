@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using Models.DomainModels;
 
 namespace Repository.BaseRepository
@@ -11,10 +12,10 @@ namespace Repository.BaseRepository
             Database.SetInitializer<BaseDbContext>(null);
         }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    throw new UnintentionalCodeFirstException();
-        //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
 
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }

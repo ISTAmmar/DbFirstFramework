@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Implementation.Services;
 using Interfaces.Services;
 using Sigma.ModelMapper;
 using Sigma.ViewModels;
@@ -21,26 +20,26 @@ namespace Sigma.Controllers
         #region Private
 
         private IRolePermissionService rolePermissionService { get; set; }
-        private AspNetRoleService roleService { get; set; }
-        private ApplicationUserManager _userManager;
+        private IAspNetRoleService roleService { get; set; }
+        private ApplicationUserManager userManager;
 
         #endregion
 
         #region Constructor
 
-        public RoleController(IRolePermissionService rolePermissionService)
+        public RoleController(IRolePermissionService rolePermissionService, IAspNetRoleService roleService)
         {
             this.rolePermissionService = rolePermissionService;
-            roleService = new AspNetRoleService();
+            this.roleService = roleService;
         }
 
         public ApplicationUserManager UserManager
         {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
+            get { return userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { userManager = value; }
         }
 
-        RoleManager<IdentityRole> _roleManager = new RoleManager<IdentityRole>(
+        RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(
             new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
         #endregion
@@ -49,7 +48,6 @@ namespace Sigma.Controllers
 
         public ActionResult RolePermission()
         {
-            var userId = User.Identity.GetUserId();
             RolePermissionViewModel viewModel = new RolePermissionViewModel();
             var response = rolePermissionService.GetRolePermissionByRoleId(0);
             viewModel.Roles = response.AspNetRoles.Select(x => x.CreateFromServerToClient()).ToList();

@@ -10,7 +10,7 @@ var TaskViewModel = function () {
     }
     self.initialize = function() {
         $.ajax({
-            url: "/Api/Task",
+            url: "/Api/DashboardApi",
             method: "GET",
             contentType: "application/json",
             success: function (result) {

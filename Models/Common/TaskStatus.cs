@@ -1,9 +1,9 @@
 ﻿namespace Models.Common
 {
-    enum TaskStatus
+    public enum TaskStatus
     {
         Pending = 0,
-        Started = 1,
+        OnGoing = 1,
         Completed = 2
     }
 }

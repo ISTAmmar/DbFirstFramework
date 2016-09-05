@@ -12,17 +12,15 @@ namespace Sigma.Controllers
     {
         #region Private
 
-        private EmployeeService employeeService { get; set; }
-        private readonly IEmployeeService iemployeeService;
+        private readonly IEmployeeService employeeService;
 
         #endregion
 
         #region Constructor
 
-        public EmployeeController(IEmployeeService iemployeeService)
+        public EmployeeController(IEmployeeService employeeService)
         {
-            this.iemployeeService = iemployeeService;
-            employeeService = new EmployeeService();
+            this.employeeService = employeeService;
         }
 
         #endregion

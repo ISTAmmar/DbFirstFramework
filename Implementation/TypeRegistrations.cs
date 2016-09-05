@@ -10,10 +10,11 @@ namespace Implementation
         {
             UnityConfig.UnityContainer = unityContainer;
             Repository.TypeRegistrations.RegisterType(unityContainer);
+            unityContainer.RegisterType<IAspNetRoleService, AspNetRoleService>();
+            unityContainer.RegisterType<IDashboardService, DashboardService>();
             unityContainer.RegisterType<IEmployeeService, EmployeeService>();
             unityContainer.RegisterType<IRolePermissionService, RolePermissionService>();
             unityContainer.RegisterType<ITaskService, TaskService>();
-            unityContainer.RegisterType<IDashboardService, DashboardService>();
         }
     }
 }

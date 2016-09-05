@@ -1,7 +1,10 @@
-﻿namespace Interfaces.Services
+﻿using System.Collections.Generic;
+using Models.DomainModels;
+
+namespace Interfaces.Services
 {
     public interface IEmployeeService
     {
-        string Get();
+        IEnumerable<Employee> GetAll();
     }
 }

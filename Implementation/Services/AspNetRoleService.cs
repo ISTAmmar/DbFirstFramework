@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Interfaces.Repositories;
+using Interfaces.Services;
 using Models.DomainModels;
-using Repository.Repositories;
 
 namespace Implementation.Services
 {
-    public class AspNetRoleService
+    public class AspNetRoleService : IAspNetRoleService
     {
         #region Private
 
-        private AspNetRoleRepository repository { get; set; }
+        private IAspNetRoleRepository repository { get; set; }
 
         #endregion
 
         #region Constructor
 
-        //public AspNetRoleService()
-        //{
-        //    repository = new AspNetRoleRepository();
-        //}
+        public AspNetRoleService(IAspNetRoleRepository repository)
+        {
+            this.repository = repository;
+        }
 
         #endregion
 

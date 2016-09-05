@@ -1,5 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Interfaces.Services;
+using Sigma.ModelMapper;
+using Sigma.ViewModels;
 
 namespace Sigma.Controllers
 {
@@ -14,8 +17,11 @@ namespace Sigma.Controllers
         // GET: Task
         public ActionResult Index()
         {
-            var dashboard = taskService.GetAll();
-            return View();
+            TaskViewModel viewModel = new TaskViewModel
+            {
+                Taskks = taskService.GetAll().Select(x => x.CreateFromServerToClient()).ToList()
+            };
+            return View(viewModel);
         }
     }
 }

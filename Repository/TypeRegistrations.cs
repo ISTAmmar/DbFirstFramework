@@ -11,8 +11,9 @@ namespace Repository
         public static void RegisterType(IUnityContainer unityContainer)
         {
             unityContainer.RegisterType<DbContext, BaseDbContext>(new PerRequestLifetimeManager());
-
             unityContainer.RegisterType<IAspNetRoleRepository, AspNetRoleRepository>();
+            unityContainer.RegisterType<IDistributorRepository, DistributorRepository>();
+            unityContainer.RegisterType<IEmployeeRepository, EmployeeRepository>();
             unityContainer.RegisterType<IRolePermissionRepository, RolePermissionRepository>();
             unityContainer.RegisterType<ITaskRepository, TaskRepository>();
         }

@@ -85,8 +85,10 @@
     <Compile Include="Repositories\IAspNetRoleRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Repositories\IDistributorRepository.cs" />
+    <Compile Include="Repositories\IEmployeeRepository.cs" />
     <Compile Include="Repositories\IRolePermissionRepository.cs" />
     <Compile Include="Repositories\ITaskRepository.cs" />
+    <Compile Include="Services\IAspNetRoleService.cs" />
     <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\IDashboardService.cs" />
     <Compile Include="Services\IRolePermissionService.cs" />

@@ -18,10 +18,10 @@ namespace Repository.Repositories
         {
         }
 
-        public AspNetRole Find(int roleId)
-        {
-            return DbSet.Find(roleId);
-        }
+        //public AspNetRole Find(int roleId)
+        //{
+        //    return DbSet.Find(roleId);
+        //}
 
         public bool CheckIfExist(AspNetRole role)
         {

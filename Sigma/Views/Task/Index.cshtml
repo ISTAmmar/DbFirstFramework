@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Sigma.ViewModels.TaskViewModel
 
 @{
     ViewBag.Title = "Task";
@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>Task Name</th>
-                <th>Task Status</th>
+                <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Progress</th>
@@ -19,17 +19,61 @@
                 <th>Parent Task</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: tasks">
-            <tr>
-                <td data-bind="text: TaskName"></td>
-                <td data-bind="text: Status"></td>
-                <td data-bind="text: StartDate"></td>
-                <td data-bind="text: EndDate"></td>
-                <td data-bind="text: Progress"></td>
-                <td data-bind="text: TaskPriority"></td>
-                <td data-bind="text: ParentTask"></td>
-            </tr>
+        <tbody>
+            @foreach (var taskk in Model.Taskks)
+            {
+                <tr>
+                    <td>@taskk.TaskName</td>
+                    <td>
+                        @{
+                            switch (taskk.Status)
+                            {
+                                case (short)Models.Common.TaskStatus.Pending:
+                                    @:Pending
+                                        break;
+                                case (short)Models.Common.TaskStatus.OnGoing:
+                                    @:On Going
+                                        break;
+                                case (short)Models.Common.TaskStatus.Completed:
+                                    @:Completed
+                                        break;
+                            }
+                        }
+                    </td>
+                    <td>@taskk.StartDate</td>
+                    <td>@taskk.EndDate</td>
+                    <td>@taskk.Progress</td>
+                    <td>
+                        @{
+                            switch (taskk.TaskPriority)
+                            {
+                                case (short)Models.Common.TaskPriority.Low:
+                                    @:Low
+                                        break;
+                                case (short)Models.Common.TaskPriority.Moderate:
+                                    @:Moderate
+                                        break;
+                                case (short)Models.Common.TaskPriority.High:
+                                    @:High
+                                        break;
+                            }
+                        }
+                    </td>
+                    <td>@taskk.ParentTaskName</td>
+                </tr>
+            }
         </tbody>
+        @*<tbody data-bind="foreach: tasks">
+                <tr>
+                    <td data-bind="text: TaskName"></td>
+                    <td data-bind="text: Status"></td>
+                    <td data-bind="text: StartDate"></td>
+                    <td data-bind="text: EndDate"></td>
+                    <td data-bind="text: Progress"></td>
+                    <td data-bind="text: TaskPriority"></td>
+                    <td data-bind="text: ParentTask"></td>
+                </tr>
+            </tbody>*@
     </table>
     <h4>Add New</h4>
     <div class="row">
@@ -47,7 +91,7 @@
 </div>
 
 @section scripts
-{
+                        {
     <script src="~/Js/Task/TaskModel.js"></script>
     <script src="~/Js/Task/TaskViewModel.js"></script>
 }
