@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Interfaces.Services;
+using Microsoft.Practices.Unity;
 
 namespace Sigma.Controllers.API
 {
@@ -12,17 +12,17 @@ namespace Sigma.Controllers.API
         //public DashboardApiController() : base()
         //{
         //}
-        public DashboardApiController(IDashboardService dashboardService)
-        {
-            this.dashboardService = dashboardService;
-        }
+        //public DashboardApiController(IDashboardService dashboardService)
+        //{
+        //    this.dashboardService = dashboardService;
+        //}
 
         [HttpGet]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
-            //dashboardService = UnityWebActivator.Container.Resolve<IDashboardService>();
+            dashboardService = UnityWebActivator.Container.Resolve<IDashboardService>();
             var dashboard = dashboardService.GetDashboardResponse();
-            return request.CreateResponse(HttpStatusCode.OK, dashboard.Distributors.ToArray());
+            return request.CreateResponse(HttpStatusCode.OK, dashboard);
         }
     }
 }

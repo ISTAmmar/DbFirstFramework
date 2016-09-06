@@ -14,7 +14,7 @@ var TaskViewModel = function () {
             method: "GET",
             contentType: "application/json",
             success: function (result) {
-                alert(result.message);
+                alert("Success");
             }
         });
     }
