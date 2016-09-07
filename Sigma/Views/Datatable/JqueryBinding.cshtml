@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Jquery Binding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <h2>Jquery Binding</h2>
+    <div id="demo">
+        <table class="table table-striped table-hover table-bordered" id="example">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+        // Helper function so we know what has changed
+        // http://stackoverflow.com/questions/12166982
+        ko.observableArray.fn.subscribeArrayChanged = function (addCallback, deleteCallback) {
+            var previousValue = undefined;
+            this.subscribe(function (_previousValue) {
+                previousValue = _previousValue.slice(0);
+            }, undefined, 'beforeChange');
+            this.subscribe(function (latestValue) {
+                var editScript = ko.utils.compareArrays(previousValue, latestValue);
+                for (var i = 0, j = editScript.length; i < j; i++) {
+                    switch (editScript[i].status) {
+                        case "retained":
+                            break;
+                        case "deleted":
+                            if (deleteCallback)
+                                deleteCallback(editScript[i].value);
+                            break;
+                        case "added":
+                            if (addCallback)
+                                addCallback(editScript[i].value);
+                            break;
+                    }
+                }
+                previousValue = undefined;
+            });
+        };
+        // Person object
+        var Person = function (data, dt) {
+            this.id = data.id;
+            this.first = ko.observable(data.first);
+            this.last = ko.observable(data.last);
+            this.age = ko.observable(data.age);
+            this.full = ko.computed(function () {
+                return this.first() + " " + this.last();
+            }, this);
+
+            // Subscribe a listener to the observable properties for the table
+            // and invalidate the DataTables row when they change so it will redraw
+            var that = this;
+            $.each(['first', 'last', 'age'], function (i, prop) {
+                that[prop].subscribe(function (val) {
+                    // Find the row in the DataTable and invalidate it, which will
+                    // cause DataTables to re-read the data
+                    var rowIdx = dt.column(0).data().indexOf(that.id);
+                    dt.row(rowIdx).invalidate();
+                });
+            });
+        };
+
+
+        // Initial data set
+        var data = [
+            { id: 0, first: "Allan", last: "Jardine", age: 86 },
+            { id: 1, first: "Bob", last: "Smith", age: 54 },
+            { id: 2, first: "Jimmy", last: "Jones", age: 32 }
+        ];
+        //var count = 3;
+        //for (var x = ++count; x <= 2000; x++) {
+        //    data.push({
+        //        id: x,
+        //        first: 'NEW',
+        //        last: 'NEW',
+        //        age: 99
+        //    });
+        //}
+
+        $(document).ready(function () {
+            var people = ko.mapping.fromJS([]);
+            var dt = $('#example').DataTable({
+                columns: [
+                    { data: 'id' },
+                    { data: 'first()' },
+                    { data: 'age()' }
+                ]
+            });
+
+            // Update the table when the `people` array has items added or removed
+            people.subscribeArrayChanged(
+                function (addedItem) {
+                    dt.row.add(addedItem).draw();
+                },
+                function (deletedItem) {
+                    var rowIdx = dt.column(0).data().indexOf(deletedItem.id);
+                    dt.row(rowIdx).remove().draw();
+                }
+            );
+
+            // Convert the data set into observable objects, and will also add the
+            // initial data to the table
+            ko.mapping.fromJS(
+                data,{
+                    key: function (data) {
+                        return ko.utils.unwrapObservable(data.id);
+                    },
+                    create: function (options) {
+                        return new Person(options.data, dt);
+                    }
+                },people);
+        });
+</script>

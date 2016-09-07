@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\TaskByColumn.cs" />
     <Compile Include="Common\TaskPriority.cs" />
     <Compile Include="Common\TaskStatus.cs" />
     <Compile Include="DomainModels\AspNetRole.cs" />
@@ -110,16 +111,17 @@
     <Compile Include="DomainModels\Distributor.cs" />
     <Compile Include="DomainModels\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestModels\GetPagedListRequest.cs" />
+    <Compile Include="RequestModels\TaskSearchRequest.cs" />
     <Compile Include="ResponseModels\DashboardResponse.cs" />
     <Compile Include="ResponseModels\RolePermissionResponse.cs" />
+    <Compile Include="ResponseModels\TaskResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RequestModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

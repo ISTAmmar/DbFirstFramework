@@ -94,4 +94,77 @@
                         {
     <script src="~/Js/Task/TaskModel.js"></script>
     <script src="~/Js/Task/TaskViewModel.js"></script>
+    <script type="text/javascript">
+        var tableColumns = [
+            {
+                "aTargets": [0],
+                "sDefaultContent": "No Data",
+                "bVisible": false,
+                "mRender": function (data, type, full) {
+                    var element;
+                    var val;
+                    var billDetailId;
+                    val = full["BillDetailId"];
+                    billDetailId = full["BillDetailId"];
+                    element = '<a href="/BillDetail/AddEdit/' + billDetailId + '">' + val + '</a>';
+                    return element;
+                }
+            },
+            { "data": "AccountNumber" },
+            { "data": "BillDate" },
+            { "data": "ServiceNumber" },
+            { "data": "ServiceType" },
+            { "data": "ChargeType" },
+            { "data": "Description" },
+            { "data": "Quantity" },
+            { "data": "InclGst" }
+        ];
+
+        var billDetails = $('#billDetails').dataTable({
+            "iDisplayLength": 11,
+            "displayStart": start || 0,
+            "bLengthChange": false,
+            "aaSorting": [sortBy],
+            "bFilter": false,
+            "bProcessing": true,
+            "oLanguage": {
+                sProcessing: '<img src="/Content/Images/loader.gif">',
+                "sEmptyTable": "No records available in the database."
+            },
+            "columns": tableColumns,
+            "processing": true,
+            "serverSide": true,
+
+            "ajax": {
+                url: "/BillDetail/Index",
+                type: "POST",
+                dataType: "json",
+                data: function (params) {
+                    debugger;
+                    params.PageNo = Math.ceil(params.start / params.length) + 1;
+                    if (params.PageNo === 0) {
+                        params.PageNo = 1;
+                    }
+                    params.PageSize = params.length;
+                    //params.SortBy = params.order[0].column;
+                    params.IsAsc = params.order[0].dir === "asc";
+
+                    params.BillDetailId = $('#BillDetailId').val();
+                    params.AccountNumber = $('#AccountNumber').val();
+                    params.BillDate = $('#BillDate').val();
+                    params.ServiceNumber = $('#ServiceNumber').val();
+                    params.ServiceType = $('#ServiceType').val();
+                    params.ChargeType = $('#ChargeType').val();
+                    params.Description = $('#Description').val();
+                    params.Quantity = $('#Quantity').val();
+                    params.InclGst = $('#InclGst').val();
+                }
+            },
+            sDom: 'C<"clear">lfrtip',
+            colVis: {
+                order: 'alfa',
+                'buttonText': 'Show/Hide Columns'
+            }
+        });
+    </script>
 }
