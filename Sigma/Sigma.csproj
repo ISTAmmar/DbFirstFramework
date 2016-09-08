@@ -235,12 +235,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Authorize\SiteAuthorize.cs" />
+    <Compile Include="Authorize\CustomAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\DashboardApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DatatableController.cs" />
+    <Compile Include="Controllers\KoDatatableController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KoTestController.cs" />
@@ -760,8 +760,8 @@
     <Content Include="Views\Employee\Delete.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
-    <None Include="Views\Datatable\JqueryBinding.cshtml" />
-    <None Include="Views\Datatable\HtmlBinding.cshtml" />
+    <None Include="Views\KoDatatable\JqueryBinding.cshtml" />
+    <None Include="Views\KoDatatable\HtmlBinding.cshtml" />
     <None Include="Views\KoTest\Index.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
   </ItemGroup>

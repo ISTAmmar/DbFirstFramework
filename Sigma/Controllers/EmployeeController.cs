@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Implementation.Services;
 using Interfaces.Services;
 using Models.DomainModels;
 using Sigma.Authorize;
@@ -27,20 +26,20 @@ namespace Sigma.Controllers
 
         #region Public
 
-        [SiteAuthorize(PermissionKey = "EmployeeView")]
+        [CustomAuthorize(PermissionKey = "EmployeeView")]
         public ActionResult Index()
         {
             IList<Employee> result = employeeService.GetAll().ToList();
             return View(result);
         }
 
-        [SiteAuthorize(PermissionKey = "EmployeeAddEdit")]
+        [CustomAuthorize(PermissionKey = "EmployeeAddEdit")]
         public ActionResult Create(long? id)
         {
             return View();
         }
 
-        [SiteAuthorize(PermissionKey = "EmployeeDelete")]
+        [CustomAuthorize(PermissionKey = "EmployeeDelete")]
         public ActionResult Delete()
         {
             return View();

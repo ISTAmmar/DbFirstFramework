@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace Sigma.Authorize
 {
-    public class SiteAuthorize : AuthorizeAttribute
+    public class CustomAuthorize : AuthorizeAttribute
     {
         public string PermissionKey { get; set; }
         public string[] PermissionKeys { get; set; }

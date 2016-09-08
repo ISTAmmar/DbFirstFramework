@@ -2,7 +2,7 @@
 
 namespace Sigma.Controllers
 {
-    public class DatatableController : Controller
+    public class KoDatatableController : Controller
     {
         // GET: Datatable
         public ActionResult HtmlBinding()
